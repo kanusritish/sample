@@ -1,0 +1,108 @@
+.menu-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 28px;
+    height: 20px;
+    z-index: 2;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    .bars {
+        position: absolute;
+        right: 0;
+        z-index: 2;
+        top: 0.5rem;
+        width: 28px;
+        height: 3px;
+        background-color: red;
+        transition: all 0.5s ease-in-out;
+        &::before {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 3px;
+            top: -8px;
+            right: 0;
+            background-color: red;
+            transition: all 0.5s ease-in-out;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            width: 28px;
+            height: 3px;
+            top: 8px;
+            right: 0;
+            background-color: red;
+            transition: all 0.5s ease-in-out;
+        }
+        &.open {
+            transform: rotate(360deg);
+            background: transparent;
+            &::before {
+                transform: rotate(45deg) translate(5px, 8px);
+            }
+            &::after {
+                transform: rotate(-45deg) translate(3px, -6px);
+            }
+        }
+    }
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: none;
+    z-index: -1;
+    width: 100vw;
+    opacity: 0.9;
+    &.open {
+        visibility: visible;
+        z-index: 0;
+    }
+    .menu-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: column wrap;
+        height: 100vh;
+        overflow: hidden;
+        background: black;
+        padding-right: 1rem;
+        list-style-type: none;
+        transition: all 0.5s ease-in-out;
+        transform: translateY(-100%);
+        &.open {
+            transform: translateY(0);
+        }
+        &-item {
+            margin: 0.5rem;
+            transform: translateX(100vw);
+            transition: all 0.5s ease-in-out;
+            &.open {
+                transform: translateX(0);
+            }
+            &.active>a {
+                color: red;
+            }
+        }
+        &-link {
+            font-size: 2rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 2rem 0;
+            color: white;
+            transition: all 0.5s ease-in-out;
+            &:hover {
+                color: red;
+            }
+        }
+    }
+}
+
+@for $i from 1 to 6 {
+    .menu-nav-item:nth-child(#{$i}) {
+        transition-delay: ($i * 0.1s) + 0.15s;
+    }
+}
